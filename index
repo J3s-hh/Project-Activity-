@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earth's Four Subsystems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            padding: 20px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #2c5282;
+            margin-bottom: 5px;
+        }
+
+        .header .author {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .earth-diagram {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .earth-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .systems {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .system {
+            background: #f8f9fa;
+            padding: 18px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .system:hover {
+            border-color: #2c5282;
+            transform: translateY(-2px);
+        }
+
+        .system.active {
+            border-color: #2c5282;
+            background: #e6f3ff;
+        }
+
+        .system-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .system h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            color: #2c5282;
+        }
+
+        .system p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .info-text {
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #2c5282;
+            display: none;
+        }
+
+        .info-text.show {
+            display: block;
+        }
+
+        .info-text h4 {
+            color: #2c5282;
+            margin-bottom: 8px;
+        }
+
+        .arrows-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .arrow {
+            transition: opacity 0.5s ease;
+        }
+
+        .arrow.show {
+            opacity: 1 !important;
+        }
+
+        .arrow.show line,
+        .arrow.show path {
+            animation: drawLine 1.5s ease-in-out;
+        }
+
+        .arrow.show polygon {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .arrow.show text {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes drawLine {
+            from { stroke-dasharray: 200; stroke-dashoffset: 200; }
+            to { stroke-dasharray: 200; stroke-dashoffset: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .examples h3 {
+            color: #2c5282;
+            margin-bottom: 15px;
+        }
+
+        .example {
+            margin: 8px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #28a745;
+            font-size: 0.95rem;
+        }
+
+        .buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .btn {
+            background: #2c5282;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 5px;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background: #2a4e7c;
+        }
+
+        .notice {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            color: #856404;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 500px) {
+            body { padding: 15px; }
+            .header h1 { font-size: 1.7rem; }
+            .main-section { padding: 20px; }
+            .systems { gap: 12px; }
+            .system { padding: 15px; }
+            .system-icon { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Earth's Four Subsystems</h1>
+        <div class="author">Jesh Santeo O. Sabalboro</div>
+    </div>
+
+    <div class="container">
+        <div class="main-section">
+            <div class="earth-diagram">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDMwMCAyNTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPCEtLSBCYWNrZ3JvdW5kIC0tPgogIDxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjUwIiBmaWxsPSIjZjBmOGZmIi8+CiAgCiAgPCEtLSBTdW4gLS0+CiAgPGNpcmNsZSBjeD0iNzAiIGN5PSI0MCIgcj0iMjUiIGZpbGw9IiNmZmQ3MDAiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgCiAgPCEtLSBDbG91ZHMgLS0+CiAgPHBhdGggZD0iTSAyMCA2MCBRIDEwIDUwIDIwIDQwIFEgMzAgMzAgNDAgNDAgUSA1MCAzMCA2MCA0MCBRIDcwIDUwIDYwIDYwIFogIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNIDIwMCA1MCBRIDE5MCA0MCAyMDAgMzAgUSAyMTAgMjAgMjIwIDMwIFEgMjMwIDIwIDI0MCAzMCBRIDI1MCA0MCAyNDAgNTAgWiAiIGZpbGw9IndoaXRlIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik0gMjQwIDEwMCBRIDIzMCA5MCAyNDAgODAgUSAyNTAgNzAgMjYwIDgwIFEgMjcwIDcwIDI4MCA4MCBRIDI5MCA5MCAyODAgMTAwIFogIiBmaWxsPSIjOTk5IiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMyIvPgogIAogIDwhLS0gUmFpbiBkcm9wcyAtLT4KICA8cGF0aCBkPSJNIDI1MCA2MCBMIDI0OCA3MCBMIDI1MiA3MCBaIiBmaWxsPSIjNjliY2ZmIi8+CiAgPHBhdGggZD0iTSAyNjAgNjUgTCAyNTggNzUgTCAyNjIgNzUgWiIgZmlsbD0iIzY5YmNmZiIvPgogIDxwYXRoIGQ9Ik0gMjQ1IDcwIEwgMjQzIDgwIEwgMjQ3IDgwIFoiIGZpbGw9IiM2OWJjZmYiLz4KICA8cGF0aCBkPSJNIDI1NSA3MCBMIDI1MyA4MCBMIDI1NyA4MCBaIiBmaWxsPSIjNjliY2ZmIi8+CiAgCiAgPCEtLSAzRCBDdWJlIGJhc2UgLS0+CiAgPHBhdGggZD0iTSA3MCAyMDAgTCAyMzAgMjAwIEwgMjcwIDE2MCBMIDE3MCAxMDAgTCA1MCAxMDAgTCA3MCAyMDAgWiIgZmlsbD0iIzkzNzI0ZiIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNIDcwIDIwMCBMIDIzMCAyMDAgTCAyMzAgMjQwIEwgNzAgMjQwIFoiIGZpbGw9IiM3ZjVmM2YiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPHBhdGggZD0iTSAyMzAgMjAwIEwgMjcwIDE2MCBMIDI3MCAyMDAgTCAyMzAgMjQwIFoiIGZpbGw9IiM5MzcyNGYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgCiAgPCEtLSBHcmFzcyBhcmVhIC0tPgogIDxwYXRoIGQ9Ik0gNTAgMTAwIEwgMTIwIDEwMCBMIDEzMCAxMjAgTCA3MCAxNjAgTCA1MCAxMDAgWiIgZmlsbD0iIzc2ZDI3YyIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNIDEzMCAxMjAgTCAyMDAAxMDAgTCAyNTAgMTQwIEwgMTcwIDE2MCBMIDE3MCAxNjAgTCAxMzAgMTIwIFoiIGZpbGw9IiM3NmQyN2MiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgCiAgPCEtLSBXYXRlciBib2R5IC0tPgogIDxwYXRoIGQ9Ik0gMTkwIDEyMCBMIDI0MCAxNDAgTCAyNzAgMTYwIEwgMjEwIDE4MCBMIDE2MCAxNjAgTCAxOTAgMTIwIFoiIGZpbGw9IiM2OWJjZmYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgCiAgPCEtLSBNb3VudGFpbiAtLT4KICA8cGF0aCBkPSJNIDEzMCAxMDAgTCAyMDAgMTAwIEwgMTcwIDQwIEwgMTQ1IDYwIEwgMTMwIDEwMCBaIiBmaWxsPSIjOTM3MjRmIiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik0gMTQ1IDYwIEwgMTcwIDQwIEwgMTgwIDUwIEwgMTU1IDcwIFoiIGZpbGw9IiM3ZjVmM2YiLz4KICA8cGF0aCBkPSJNIDEyMCAxMDUgTCAxNDUgNjAgTCAxNTUgNzAgTCAxMzAgMTIwIFoiIGZpbGw9IiM3ZjVmM2YiLz4KICA8cGF0aCBkPSJNIDE4MCA1MCBMIDI5MCA1MCBMIDE2NyA2NSBMIDE4MCA1MCBaIiBmaWxsPSIjN2Y1ZjNmIi8+CiAgCiAgPCEtLSBUcmVlIC0tPgogIDxwYXRoIGQ9Ik0gOTAgMTQwIEwgMTAwIDE0MCBMIDEwNSAxMDAgTCA4NSAxMDAgWiIgZmlsbD0iIzc5NTU0OCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8Y2lyY2xlIGN4PSI5NSIgY3k9IjkwIiByPSIyMCIgZmlsbD0iIzc2ZDI3YyIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8IS0tIE94eWdlbiByZWxlYXNlIGZyb20gdHJlZSAtLT4KICA8cGF0aCBkPSJNIDExNSA4MCBMIDI1IDc1IiBzdHJva2U9IiM2OWJjZmYiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIvPgogIDxwYXRoIGQ9Ik0gMTE4IDg1IEwgMzAgODUiIHN0cm9rZT0iIzY5YmNmZiIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJub25lIi8+CiAgPHBhdGggZD0iTSAxMjAgOTAgTCA0MCA5NSIgc3Ryb2tlPSIjNjliY2ZmIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KICA8IS0tIFJvb3RzIC0tPgogIDxwYXRoIGQ9Ik0gOTAgMTQwIFEgNzAgMTcwIDkwIDIwMCIgc3Ryb2tlPSIjZjlkNzFjIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiLz4KICA8cGF0aCBkPSJNIDEwMCAxNDAgUSAxMjAgMTcwIDEwMCAyMDAiIHN0cm9rZT0iI2Y5ZDcxYyIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIi8+Cjwvc3ZnPg==" alt="Earth's Subsystems Diagram" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            </div>
+            <div class="intro">
+                Click on each system to learn about it
+            </div>
+            
+            <div class="systems">
+                <div class="system" data-system="atmosphere">
+                    <div class="system-icon">☁️</div>
+                    <h3>Atmosphere</h3>
+                    <p>Air and gases</p>
+                </div>
+                
+                <div class="system" data-system="hydrosphere">
+                    <div class="system-icon">💧</div>
+                    <h3>Hydrosphere</h3>
+                    <p>Water everywhere</p>
+                </div>
+                
+                <div class="system" data-system="geosphere">
+                    <div class="system-icon">🗻</div>
+                    <h3>Geosphere</h3>
+                    <p>Land and rocks</p>
+                </div>
+                
+                <div class="system" data-system="biosphere">
+                    <div class="system-icon">🌿</div>
+                    <h3>Biosphere</h3>
+                    <p>Living things</p>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="btn" onclick="reset()">Clear</button>
+            </div>
+
+            <div class="info-text" id="atmosphere-info">
+                <h4>Atmosphere</h4>
+                <p>Contains the air we breathe. Made of oxygen, nitrogen, and other gases. Creates weather and protects us from space.</p>
+            </div>
+
+            <div class="info-text" id="hydrosphere-info">
+                <h4>Hydrosphere</h4>
+                <p>All water on Earth - oceans, rivers, lakes, rain, and ice. Water moves through the water cycle.</p>
+            </div>
+
+            <div class="info-text" id="geosphere-info">
+                <h4>Geosphere</h4>
+                <p>The solid part of Earth including rocks, mountains, soil, and minerals. Always changing through erosion.</p>
+            </div>
+
+            <div class="info-text" id="biosphere-info">
+                <h4>Biosphere</h4>
+                <p>All living things - plants, animals, bacteria, and humans. Life exists in air, water, and on land.</p>
+            </div>
+        </div>
+
+        <div class="examples">
+            <h3>How They Work Together</h3>
+            <div class="example">
+                <strong>Water Cycle:</strong> Water evaporates from oceans, forms clouds, then falls as rain
+            </div>
+            <div class="example">
+                <strong>Plant Growth:</strong> Plants need air, water, soil nutrients, and sunlight to grow
+            </div>
+            <div class="example">
+                <strong>Weather:</strong> Air temperature and water vapor create different weather patterns
+            </div>
+            <div class="example">
+                <strong>Erosion:</strong> Wind and water slowly wear down rocks and change the land
+            </div>
+        </div>
+        
+        <div class="notice">
+            This website will be removed after 1 week due to hosting limitations.
+        </div>
+    </div>
+
+    <script>
+        const systems = document.querySelectorAll('.system');
+        const infoTexts = document.querySelectorAll('.info-text');
+
+        systems.forEach(system => {
+            system.addEventListener('click', function() {
+                const systemType = this.dataset.system;
+                
+                // Remove active from all
+                systems.forEach(s => s.classList.remove('active'));
+                infoTexts.forEach(info => info.classList.remove('show'));
+                
+                // Add active to clicked
+                this.classList.add('active');
+                document.getElementById(systemType + '-info').classList.add('show');
+            });
+        });
+
+        function reset() {
+            systems.forEach(s => s.classList.remove('active'));
+            infoTexts.forEach(info => info.classList.remove('show'));
+        }
+    </script>
+</body>
+</html>
